@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /sbin/setuser abc /usr/sbin/burp -c /config/burp-server.conf -F
