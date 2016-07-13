@@ -11,7 +11,7 @@ docker create \
     -v /path/to/backups:/data \
     -v /etc/localtime:/etc/localtime:ro \
     -p 4971:4971 -p 4972:4972 \
-    computerfr33k/docker-burp-backup-server
+    computerfr33k/docker-burp-backup-server:<VERSION>
 ```
 
 **Parameters**
@@ -36,13 +36,22 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 ## Setting up the application
 
+*Please Note: /etc/burp is located as /config in the docker container.*
 
+See the [docs](http://burp.grke.org/docs.html)
+
+## Versions
+
+The version number corresponds to what version of burp server you want to run. This allows you to stay on a specific version of the software without having to worry about all of a sudden getting a different version that is incompatible with your configs.
+
+### Available Versions
+
+* latest - latest version 2 (once I finish setting up the stable version)
+* 1.4.40 - Stable
 
 ## Updates
 
 * To monitor the logs of the container in realtime `docker logs -f burp-server`.
-
-
 
 ## Version History
 
