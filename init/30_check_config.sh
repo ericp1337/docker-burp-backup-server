@@ -10,7 +10,7 @@ function isDirEmpty {
 }
  
 function createIfMissing {
-    if [ -f "/config/$1" ]
+    if [ ! -f "/config/$1" ]
     then
         cp /defaults/$1 /config/$1
         chown -R abc:abc /config/$1

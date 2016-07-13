@@ -1,6 +1,6 @@
 # computerfr33k/docker-burp-backup-server
 
-(description)
+[Burp](http://burp.grke.org/) is a network backup and restore program. It attempts to reduce network traffic and the amount of space that is used by each backup.
 
 ## Usage
 
@@ -20,8 +20,11 @@ docker create \
 * `-v /etc/localtime` for timesync - *optional*
 * `-v /config` - Configuration file location
 * `-v /data` - Location for backups
-* `-e PGID` for for GroupID - see below for explanation - *optional*
-* `-e PUID` for for UserID - see below for explanation - *optional*
+* `-e PGID` for GroupID - see below for explanation - *optional*
+* `-e PUID` for UserID - see below for explanation - *optional*
+* `-e ENABLE_CRON_SUMMARY` - Enables emailing a daily summary *optional*
+* `-e BURP_EMAIL` - Sets the email address to send the daily summary to. *only required if cron summary is enabled*
+* `-e DISABLE_CRON_DEDUP` - Disable running dedup once a week over client storage *optional*
 
 It is based on phusion-baseimage with ssh removed, for shell access whilst the container is running do `docker exec -it burp-server /bin/bash`.
 

@@ -12,6 +12,7 @@ ENV BURP_VERSION="1.4.40"
 
 ADD init/ /etc/my_init.d/
 ADD service/ /etc/service/
+ADD cron.d/ /etc/cron.d/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
 
 RUN useradd -u 911 -U -d /config -s /bin/false abc && \
@@ -37,9 +38,9 @@ ENV PATH=$PATH:/app/usr/sbin
       
 RUN sed -i 's/^directory =.*/directory = \/data/g' /defaults/burp-server.conf && \
       sed -i 's/\/etc\/burp/\/config/g' /defaults/burp-server.conf && \
-      sed -i 's/^stdout =.*/stdout = 1/g' /defaults/burp-server.conf && \
       sed -i 's/\/usr\/sbin/\/app\/usr\/sbin/g' /defaults/burp-server.conf && \
-      sed -i 's/\/etc\/burp/\/config/g' /defaults/CA.cnf
+      sed -i 's/\/etc\/burp/\/config/g' /defaults/CA.cnf && \
+      sed -i 's/^pidfile =.*/pidfile = \/app\/burp.server.pid/g' /defaults/burp-server.conf
       
 RUN sed -i 's/^directory =.*/directory = \/data/g' /defaults/burp.conf && \
       sed -i 's/\/etc\/burp/\/config/g' /defaults/burp.conf && \
