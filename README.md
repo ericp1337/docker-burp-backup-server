@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/computerfr33k/docker-burp-backup-server.svg?branch=master)](https://travis-ci.org/computerfr33k/docker-burp-backup-server)
+
 # computerfr33k/burp-server
 
 [Burp](http://burp.grke.org/) is a network backup and restore program. It attempts to reduce network traffic and the amount of space that is used by each backup.
