@@ -11,7 +11,7 @@ docker create \
     -v /path/to/backups:/data \
     -v /etc/localtime:/etc/localtime:ro \
     -p 4971:4971 -p 4972:4972 \
-    computerfr33k/docker-burp-backup-server
+    computerfr33k/docker-burp-backup-server:1.4.40
 ```
 
 **Parameters**
