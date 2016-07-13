@@ -4,4 +4,4 @@ services:
   - docker
 
 script:
-  - docker build -f burp-server .
+  - docker build -t computerfr33k/burp-server .
