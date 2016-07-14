@@ -1,4 +1,6 @@
-# computerfr33k/docker-burp-backup-server
+[![Build Status](https://travis-ci.org/computerfr33k/docker-burp-backup-server.svg?branch=master)](https://travis-ci.org/computerfr33k/docker-burp-backup-server)
+
+# computerfr33k/burp-server
 
 [Burp](http://burp.grke.org/) is a network backup and restore program. It attempts to reduce network traffic and the amount of space that is used by each backup.
 
@@ -10,8 +12,9 @@ docker create \
     -v /path/to/config/data:/config \
     -v /path/to/backups:/data \
     -v /etc/localtime:/etc/localtime:ro \
+    -e PGID=<gid> -e PUID=<uid> \
     -p 4971:4971 -p 4972:4972 \
-    computerfr33k/docker-burp-backup-server:1.4.40
+    computerfr33k/burp-server:<VERSION>
 ```
 
 **Parameters**
@@ -22,9 +25,9 @@ docker create \
 * `-v /data` - Location for backups
 * `-e PGID` for GroupID - see below for explanation - *optional*
 * `-e PUID` for UserID - see below for explanation - *optional*
-* `-e ENABLE_CRON_SUMMARY` - Enables emailing a daily summary *optional*
-* `-e BURP_EMAIL` - Sets the email address to send the daily summary to. *only required if cron summary is enabled*
-* `-e DISABLE_CRON_DEDUP` - Disable running dedup once a week over client storage *optional*
+* `-e ENABLE_CRON_SUMMARY=1` - Enables emailing a daily summary - *optional*
+* `-e BURP_EMAIL="myemail@domain.tld"` - Sets the email address to send the daily summary to. - *only required if cron summary is enabled*
+* `-e DISABLE_CRON_DEDUP=1` - Disables running dedup cron job - *optional*
 
 It is based on phusion-baseimage with ssh removed, for shell access whilst the container is running do `docker exec -it burp-server /bin/bash`.
 
@@ -36,13 +39,22 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 ## Setting up the application
 
+*Please Note: /etc/burp is located as /config in the docker container.*
 
+See the [docs](http://burp.grke.org/docs.html)
+
+## Versions
+
+The version number corresponds to what version of burp server you want to run. This allows you to stay on a specific version of the software without having to worry about all of a sudden getting a different version that is incompatible with your configs.
+
+### Available Versions
+
+* latest - latest version 2 (once I finish setting up the stable version)
+* 1.4.40 - Stable
 
 ## Updates
 
 * To monitor the logs of the container in realtime `docker logs -f burp-server`.
-
-
 
 ## Version History
 
