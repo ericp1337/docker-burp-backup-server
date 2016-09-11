@@ -1,0 +1,25 @@
+---
+
+- name: Update System Packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Install Build Dependencies
+  apt:
+    state: latest
+    name: "{{ item }}"
+  with_items:
+    - librsync1
+    - librsync-dev
+    - libz-dev
+    - libssl-dev
+    - uthash-dev
+    - libncurses5-dev
+    - libacl1-dev
+    - make
+    - g++
+    - gcc
+    - git
+
+- action: setup

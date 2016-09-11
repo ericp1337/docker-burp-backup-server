@@ -1,0 +1,31 @@
+---
+
+- name: Download Burp Server
+  git:
+    depth: 1
+    repo: "https://github.com/grke/burp.git"
+    version: "{{ BURP_VERSION }}"
+    dest: /tmp/burp
+
+- shell: ./configure --sysconfdir=/defaults --localstatedir=/var && make && make install
+  args:
+    chdir: /tmp/burp
+
+- name: Remove Build Dependencies (Free-up Space)
+  apt:
+    name: "{{ item }}"
+    state: absent
+    autoremove: yes
+  with_items:
+    - librsync-dev
+    - libz-dev
+    - libssl-dev
+    - uthash-dev
+    - libncurses5-dev
+    - libacl1-dev
+    - make
+    - g++
+    - gcc
+    - git
+
+- action: setup
