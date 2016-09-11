@@ -4,7 +4,4 @@ services:
   - docker
 
 script:
-  - docker build \
-    --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-    --build-arg VCS_REF="$TRAVIS_COMMIT" \
-    -t computerfr33k/burp-server:"$TRAVIS_BRANCH" .
+  - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF="$TRAVIS_COMMIT" -t computerfr33k/burp-server:"$TRAVIS_BRANCH" .
