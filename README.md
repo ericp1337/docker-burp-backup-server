@@ -1,7 +1,6 @@
 # Docker Image
 
 [![](https://images.microbadger.com/badges/image/computerfr33k/burp-server.svg)](http://microbadger.com/images/computerfr33k/burp-server "Get your own image badge on microbadger.com")
-
 [![](https://images.microbadger.com/badges/version/computerfr33k/burp-server.svg)](http://microbadger.com/images/computerfr33k/burp-server "Get your own version badge on microbadger.com")
 
 # Build
@@ -28,9 +27,9 @@ docker create \
 * `-p 4971 -p 4972` - the port(s)
 * `-v /etc/burp` - Configuration file location
 * `-v /data` - Location for backups
-* `-e ENABLE_CRON_SUMMARY=1` - Enables emailing a daily summary - *optional*
+* `-e ENABLE_CRON_SUMMARY=0` - Enables emailing a daily summary (default: false) - *optional*
 * `-e BURP_EMAIL="myemail@domain.tld"` - Sets the email address to send the daily summary to. - *only required if cron summary is enabled*
-* `-e DISABLE_CRON_DEDUP=1` - Disables running dedup cron job - *optional*
+* `-e ENABLE_CRON_DEDUP=1` - Disables running dedup cron job (default: true) - *optional*
 
 It is based on alpine linux with ssh disabled, for shell access whilst the container is running do `docker exec -it burp-server /bin/bash`.
 
