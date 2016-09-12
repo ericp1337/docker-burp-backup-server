@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  burp-server:
+    image: computerfr33k/burp-server:latest
+    environment:
+      - ENABLE_CRON_DEDUP=1
+    ports:
+      - "4971:4971"
+      - "4972:4972"
+    volumes:
+      - "/var/spool/burp:/data"
+      - "/etc/burp:/etc/burp"

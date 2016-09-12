@@ -27,11 +27,11 @@ docker create \
 * `-p 4971 -p 4972` - the port(s)
 * `-v /etc/burp` - Configuration file location
 * `-v /data` - Location for backups
-* `-e ENABLE_CRON_SUMMARY=0` - Enables emailing a daily summary (default: false) - *optional*
-* `-e BURP_EMAIL="myemail@domain.tld"` - Sets the email address to send the daily summary to. - *only required if cron summary is enabled*
-* `-e ENABLE_CRON_DEDUP=1` - Disables running dedup cron job (default: true) - *optional*
+* `-e ENABLE_CRON_DEDUP=1` - Enables burp dedup (default: true) - *optional*
 
-It is based on alpine linux with ssh disabled, for shell access whilst the container is running do `docker exec -it burp-server /bin/bash`.
+Otherwise you can use docker compose. Just edit the `docker-compose.yml` file and run `docker-compose up -d burp-server` to start the server in the background.
+
+It is based on alpine linux with ssh disabled, for shell access whilst the container is running do `docker exec -it burp-server /bin/bash` or with docker compose `docker-compose exec burp-server /bin/bash`.
 
 ## Setting up the application
 
@@ -43,13 +43,12 @@ The version number corresponds to what version of burp server you want to run. T
 
 ### Available Versions
 
-* latest - latest version 2 (once I finish setting up the stable version)
-* 1.4.40 - Stable
+[Tags](https://hub.docker.com/r/computerfr33k/burp-server/tags/)
 
 ## Updates
 
 * The docker image is now based on alpine linux and configs are now located in `/etc/burp`.
-* To monitor the logs of the container in realtime `docker logs -f burp-server`.
+* To monitor the logs of the container in realtime `docker logs -f burp-server` or with docker compose `docker-compose logs -f burp-server`.
 
 ## Version History
 
