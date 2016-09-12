@@ -7,7 +7,7 @@ script:
   - docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF="$TRAVIS_COMMIT" -t computerfr33k/burp-server:"$TRAVIS_BRANCH" .
 
 after_success:
-  - if [ ! "$TRAVIS_PULL_REQUEST" ]; then
+  - if [ "$TRAVIS_PULL_REQUEST" == false ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push USER/REPO;
     fi
