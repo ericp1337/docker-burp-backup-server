@@ -4,6 +4,18 @@ VOLUME ["/data", "/etc/burp"]
 
 EXPOSE 4971 4972
 
+# Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.docker.dockerfile="/Dockerfile" \
+      org.label-schema.license="AGPLv3" \
+      org.label-schema.name="Burp - backup and restore program" \
+      org.label-schema.url="http://burp.grke.org/" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-type="Git" \
+      org.label-schema.vcs-url="https://github.com/computerfr33k/docker-burp-backup-server"
+
 COPY conf/ /opt/docker/
 
 RUN /usr/local/bin/apk-upgrade \
