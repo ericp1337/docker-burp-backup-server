@@ -9,5 +9,5 @@ script:
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" == false ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push USER/REPO;
+    docker push computerfr33k/burp-server;
     fi
