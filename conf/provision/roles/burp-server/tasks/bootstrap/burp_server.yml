@@ -7,25 +7,17 @@
     version: "{{ BURP_VERSION }}"
     dest: /tmp/burp
 
-- shell: ./configure --sysconfdir=/defaults --localstatedir=/var && make && make install
+- shell: ./configure --sysconfdir=/defaults --localstatedir=/data && make && make install
   args:
     chdir: /tmp/burp
 
-- name: Remove Build Dependencies (Free-up Space)
-  apt:
-    name: "{{ item }}"
-    state: absent
-    autoremove: yes
+- file: path="{{ item }}" state=directory mode=0700
   with_items:
-    - librsync-dev
-    - libz-dev
-    - libssl-dev
-    - uthash-dev
-    - libncurses5-dev
-    - libacl1-dev
-    - make
-    - g++
-    - gcc
-    - git
+    - /etc/burp
+    - /data
+
+- lineinfile: dest=/defaults/burp-server.conf state=present regexp="^directory =" line="directory = /data"
+
+- lineinfile: dest=/defaults/burp-server.conf state=present regexp="^stdout =" line="stdout = 1"
 
 - action: setup

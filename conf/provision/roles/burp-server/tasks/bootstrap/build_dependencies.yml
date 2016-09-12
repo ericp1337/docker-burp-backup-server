@@ -1,22 +1,21 @@
 ---
 
 - name: Update System Packages
-  apt:
+  apk:
     update_cache: yes
-    upgrade: dist
+    upgrade: yes
 
 - name: Install Build Dependencies
-  apt:
+  apk:
     state: latest
     name: "{{ item }}"
   with_items:
-    - librsync1
+    - librsync
     - librsync-dev
-    - libz-dev
-    - libssl-dev
-    - uthash-dev
-    - libncurses5-dev
-    - libacl1-dev
+    - zlib-dev
+    - openssl-dev
+    - ncurses-dev
+    - acl-dev
     - make
     - g++
     - gcc

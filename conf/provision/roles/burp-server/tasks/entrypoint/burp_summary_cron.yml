@@ -1,0 +1,15 @@
+---
+
+- name: Enable Cron Summary Script
+  cron:
+    name: "Burp Backup Summary"
+    job: /etc/burp/summary_script /etc/burp/burp-server.conf $BURP_EMAIL "Daily backup summary"
+    minute: 0
+    hour: 6
+  when: ENABLE_CRON_SUMMARY | bool
+
+- name: Disable Cron Summary Script
+  cron:
+    name: "Burp Backup Summary"
+    state: absent
+  when: not ENABLE_CRON_SUMMARY | bool

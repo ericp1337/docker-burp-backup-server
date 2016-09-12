@@ -1,0 +1,18 @@
+---
+
+- name: "Enable Deup Cronjob"
+  cron:
+    name: "Burp Dedup"
+    minute: 0
+    hour: 8
+    weekday: 6
+    state: present
+    disabled: no
+    job: "/usr/sbin/bedup -l -c /etc/burp/burp-server.conf >> /data/burp-bedup.log 2>&1"
+  when: ENABLE_CRON_DEDUP | bool
+
+- name: "Disable Dedup Cronjob"
+  cron:
+    name: "Burp Dedup"
+    state: absent
+  when: not ENABLE_CRON_DEDUP | bool

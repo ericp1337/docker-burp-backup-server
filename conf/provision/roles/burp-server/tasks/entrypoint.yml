@@ -1,3 +1,6 @@
 ---
 
-
+- include: entrypoint/copy_configs.yml
+- include: entrypoint/cron_env.yml
+- include: entrypoint/dedup_cron.yml
+- include: entrypoint/burp_summary_cron.yml
