@@ -45,6 +45,9 @@ The version number corresponds to what version of burp server you want to run. T
 
 [Tags](https://hub.docker.com/r/computerfr33k/burp-server/tags/)
 
+* latest: Most recent burp release. (v2)
+* 1.4.40-2 has breaking changes from 1.4.40 due to being based on a new docker image.
+
 ## Updates
 
 * The docker image is now based on alpine linux and configs are now located in `/etc/burp`.
