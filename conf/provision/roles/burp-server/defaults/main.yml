@@ -3,7 +3,7 @@
 APPLICATION_UID:     "{{ lookup('env', 'APPLICATION_UID') }}"
 APPLICATION_GID:     "{{ lookup('env', 'APPLICATION_GID') }}"
 
-BURP_VERSION:        "2.0.46"
+BURP_VERSION:        "2.0.48"
 
 # Burp Cronjobs
 ENABLE_CRON_DEDUP:   "{{ lookup('env', 'ENABLE_CRON_DEDUP') | default(True) }}"
