@@ -44,6 +44,7 @@ RUN /usr/local/bin/apk-upgrade \
     automake \
     libtool \
     unzip \
+    coreutils \
     
     # Provision
     && /opt/docker/bin/provision add --tag bootstrap --tag entrypoint burp-server \
