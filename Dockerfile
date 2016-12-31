@@ -16,8 +16,6 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-type="Git" \
       org.label-schema.vcs-url="https://github.com/computerfr33k/docker-burp-backup-server"
 
-COPY conf/ /opt/docker/
-
 # Install Required System Packages
 RUN /usr/local/bin/apk-upgrade \
     && /usr/local/bin/apk-install \
@@ -44,6 +42,8 @@ RUN /usr/local/bin/apk-upgrade \
     unzip \
     zlib \
     zlib-dev
+
+COPY conf/ /opt/docker/
 
 # Provision
 RUN /opt/docker/bin/provision add --tag bootstrap --tag entrypoint burp-server \
