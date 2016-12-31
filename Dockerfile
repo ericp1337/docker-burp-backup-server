@@ -18,52 +18,34 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 COPY conf/ /opt/docker/
 
+# Install Required System Packages
 RUN /usr/local/bin/apk-upgrade \
     && /usr/local/bin/apk-install \
+    acl-dev \
+    attr-dev \
+    autoconf \
+    automake \
+    coreutils \
+    g++ \
+    gcc \
+    git \
+    libacl \
+    libgcc \
     librsync \
     librsync-dev \
-    zlib-dev \
-    zlib \
-    openssl-dev \
-    openssl \
-    ncurses-dev \
-    ncurses \
-    acl-dev \
-    libacl \
-    attr-dev \
-    libattr \
-    make \
-    gcc \
-    g++ \
-    make \
-    git \
-    rsync \
     libstdc++ \
-    libgcc \
-    autoconf \
-    automake \
     libtool \
-    unzip \
-    coreutils \
-    
-    # Provision
-    && /opt/docker/bin/provision add --tag bootstrap --tag entrypoint burp-server \
-    && /opt/docker/bin/bootstrap.sh \
-    && rm -rf /tmp/* \
-    
-    # Remove Dev Libs    
-    && apk del \
-    librsync-dev \
-    zlib-dev \
-    openssl-dev \
+    make \
+    ncurses \
     ncurses-dev \
-    acl-dev \
-    attr-dev \
-    make \
-    gcc \
-    g++ \
-    make \
-    git \
-    autoconf \
-    automake \
-    libtool \
+    openssl \
+    openssl-dev \
+    rsync \
+    unzip \
+    zlib \
+    zlib-dev
+
+# Provision
+RUN /opt/docker/bin/provision add --tag bootstrap --tag entrypoint burp-server \
+    && /opt/docker/bin/bootstrap.sh \
+    && rm -rf /tmp/*
