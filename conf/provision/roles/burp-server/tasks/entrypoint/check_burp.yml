@@ -1,0 +1,37 @@
+---
+
+# Determines if burp needs to be installed/updated
+
+# determine the latest version
+- get_url:
+    url: https://api.github.com/repos/grke/burp/releases/latest
+    dest: /tmp/version.txt
+  when: VERSION == "latest"
+
+- command: echo "{{ REMOTE_VERSION_RESPONSE.tag_name }}"
+  register: remote_version
+  when: VERSION == "latest"
+
+- debug: msg="{{ remote_version }}"
+
+- command: command -v /usr/sbin/burp >/dev/null 2>&1
+  register: installed
+  ignore_errors: yes
+
+- debug: msg="Burp not installed"
+  when: installed|failed
+
+- name: Determine installed burp version
+  shell: /usr/sbin/burp -v | cut -c 6-
+  register: installed_version
+  when: installed|succeeded
+
+- debug: msg="Burp is installed v{{ installed_version.stdout }}"
+  when: installed|succeeded
+
+- command: "true"
+  register: needs_update
+  when: (installed|failed) or (installed_version.stdout != remote_version.stdout)
+  
+- debug: msg="Burp Needs update!"
+  when: needs_update|succeeded

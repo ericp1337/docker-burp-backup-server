@@ -1,5 +1,11 @@
 ---
 
-- include: entrypoint/copy_configs.yml
+- include: entrypoint/check_burp.yml
+
+# Run Update/Installation if needed
+- include: entrypoint/update_burp.yml
+  when: needs_update|succeeded
+
 - include: entrypoint/cron_env.yml
+
 - include: entrypoint/dedup_cron.yml

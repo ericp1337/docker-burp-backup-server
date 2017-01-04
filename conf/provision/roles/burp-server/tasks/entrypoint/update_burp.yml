@@ -1,0 +1,43 @@
+---
+
+- debug: msg="updating burp installation..."
+
+- git:
+    repo: https://github.com/grke/burp
+    dest: /tmp/burp
+    version: "{{ remote_version.stdout }}"
+    depth: 3
+  when: VERSION == "latest"
+
+# Install version based on env when not set to latest
+- git:
+    repo: https://github.com/grke/burp
+    dest: /tmp/burp
+    version: "{{ VERSION }}"
+    depth: 3
+  when: VERSION != "latest"
+
+- command: autoreconf -vif
+  args:
+    chdir: /tmp/burp
+
+- command: ./configure --prefix=/usr --sysconfdir=/etc/burp --localstatedir=/data
+  args:
+    chdir: /tmp/burp
+
+# Build the default target
+- make:
+    chdir: /tmp/burp
+
+# Run `install` target
+- make:
+    chdir: /tmp/burp
+    target: install
+
+- stat: path=/etc/burp/burp-server.conf
+  register: install_configs
+
+- make:
+    chdir: /tmp/burp
+    target: install-configs
+  when: install_configs.stat.exists == False
