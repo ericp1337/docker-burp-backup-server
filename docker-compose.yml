@@ -2,10 +2,10 @@ version: '2'
 
 services:
   burp-server:
-    image: computerfr33k/burp-server:latest
+    image: computerfr33k/burp-server:develop
     environment:
       - ENABLE_CRON_DEDUP=1 # Enables the burp deduplication cron job
-      - TZ="<timezone>" # For timezone information eg Europe/London, etc
+      - TZ="America/Chicago" # For timezone information eg Europe/London, etc
       - VERSION=latest
     ports:
       - "4971:4971"

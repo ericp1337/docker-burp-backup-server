@@ -4,7 +4,7 @@
 
 # Run Update/Installation if needed
 - include: entrypoint/update_burp.yml
-  when: needs_update|succeeded
+  when: update_available
 
 - include: entrypoint/cron_env.yml
 

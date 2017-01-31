@@ -29,8 +29,7 @@ RUN /usr/local/bin/apk-upgrade \
     rsync \
     unzip \
     zlib \
-    zlib-dev \
-    jq
+    zlib-dev
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE

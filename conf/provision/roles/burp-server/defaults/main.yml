@@ -5,7 +5,7 @@ APPLICATION_GID:     "{{ lookup('env', 'APPLICATION_GID') }}"
 
 VERSION:             "{{ lookup('env', 'VERSION') | lower | default('latest') }}"
 
-REMOTE_VERSION_RESPONSE: "{{ lookup('file', '/tmp/version.txt') | from_json }}"
+REMOTE_VERSION_RESPONSE: "{{ lookup('file', '/tmp/remote_version.txt') | from_json }}"
 
 # Burp Cronjobs
 ENABLE_CRON_DEDUP:   "{{ lookup('env', 'ENABLE_CRON_DEDUP') | default(True) }}"
