@@ -16,14 +16,16 @@
 ```
 docker create \
     --name="burp-server" \
+    -e VERSION=latest \
     -v /path/to/config/dir:/etc/burp \
     -v /path/to/backups:/data \
     -p 4971:4971 -p 4972:4972 \
-    computerfr33k/burp-server:<VERSION>
+    computerfr33k/burp-server:latest
 ```
 
 **Parameters**
 
+* `-e VERSION` - specifies which version of burp to install on start
 * `-p 4971 -p 4972` - the port(s)
 * `-v /etc/burp` - Configuration file location
 * `-v /data` - Location for backups
@@ -50,10 +52,12 @@ The version number corresponds to what version of burp server you want to run. T
 
 ## Updates
 
+* You can now pass the version of burp to install at runtime using the `VERSION` environment variable
 * The docker image is now based on alpine linux and configs are now located in `/etc/burp`.
 * To monitor the logs of the container in realtime `docker logs -f burp-server` or with docker compose `docker-compose logs -f burp-server`.
 
 ## Version History
 
++ **1/31/2017** Dynamically install burp versions without needing to pre-install burp for each docker container version
 + **09/12/2016:** Base on Alpine Linux w/ ansible provisioning
 + **07/12/2016:** Inital Release
