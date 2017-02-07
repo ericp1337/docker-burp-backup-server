@@ -2,7 +2,7 @@ version: '2'
 
 services:
   burp-server:
-    image: computerfr33k/burp-server:develop
+    image: computerfr33k/burp-server:latest
     environment:
       - ENABLE_CRON_DEDUP=1 # Enables the burp deduplication cron job
       - TZ="America/Chicago" # For timezone information eg Europe/London, etc
