@@ -5,22 +5,12 @@
 # Clean existing git repo
 - file: path=/tmp/burp state=absent
 
-- name: Download Lastest Source Code
+- name: Download Source Code
   git:
     repo: https://github.com/grke/burp.git
     dest: /tmp/burp
-    version: "{{ remote_version.stdout }}"
+    version: "{{ remote_version }}"
     accept_hostkey: yes
-  when: VERSION == "latest"
-
-# Install version based on env when not set to latest
-- name: Download Specified Version
-  git:
-    repo: https://github.com/grke/burp.git
-    dest: /tmp/burp
-    version: "{{ VERSION }}"
-    accept_hostkey: yes
-  when: VERSION != "latest"
 
 - name: Generate automake files
   command: autoreconf -vif
@@ -54,5 +44,11 @@
 
 - name: Save installed version info
   copy:
-    content: "{{ remote_version.stdout }}"
+    content: "{{ remote_version }}"
     dest: /.installed_version.txt
+
+- name: Disable Updates
+  copy:
+    content: "Updates have been disabled"
+    dest: /tmp/no-version.nfo
+  when: VERSION != "latest"

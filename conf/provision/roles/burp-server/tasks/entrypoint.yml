@@ -1,10 +1,22 @@
 ---
 
+# Default to no update available
+- set_fact:
+    update_available: false
+
+- name: Determine if upgrade is allowed
+  stat:
+    path: /tmp/no-version.nfo
+  register: no_version
+
 - include: entrypoint/check_burp.yml
+  when:
+    - no_version.stat.exists == False
 
 # Run Update/Installation if needed
 - include: entrypoint/update_burp.yml
-  when: update_available
+  when:
+    - update_available
 
 - include: entrypoint/cron_env.yml
 
