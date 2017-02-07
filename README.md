@@ -39,17 +39,6 @@ It is based on alpine linux with ssh disabled, for shell access whilst the conta
 
 See the [docs](http://burp.grke.org/docs.html)
 
-## Versions
-
-The version number corresponds to what version of burp server you want to run. This allows you to stay on a specific version of the software without having to worry about all of a sudden getting a different version that is incompatible with your configs.
-
-### Available Versions
-
-[Tags](https://hub.docker.com/r/computerfr33k/burp-server/tags/)
-
-* latest: Most recent burp release. (v2)
-* 1.4.40-2 has breaking changes from 1.4.40 due to being based on a new docker image.
-
 ## Updates
 
 * You can now pass the version of burp to install at runtime using the `VERSION` environment variable
