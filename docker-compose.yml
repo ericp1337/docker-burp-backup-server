@@ -4,10 +4,13 @@ services:
   burp-server:
     image: computerfr33k/burp-server:latest
     environment:
-      - ENABLE_CRON_DEDUP=1
+      - ENABLE_CRON_DEDUP=1 # Enables the burp deduplication cron job
+      - TZ="America/Chicago" # For timezone information eg Europe/London, etc
+      - VERSION=latest
     ports:
       - "4971:4971"
       - "4972:4972"
     volumes:
+      - /etc/localtime:/etc/localtime:ro # Sync container timezone with host.
       - "/var/spool/burp:/data"
       - "/etc/burp:/etc/burp"

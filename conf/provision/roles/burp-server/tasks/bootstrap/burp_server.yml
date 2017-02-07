@@ -5,34 +5,4 @@
     src: uthash.h
     dest: /usr/include/uthash.h
 
-- name: Download Burp Server
-  git:
-    depth: 1
-    repo: "https://github.com/grke/burp.git"
-    version: "{{ BURP_VERSION }}"
-    dest: /tmp/burp
-
-- shell: autoreconf -vif && ./configure --prefix=/usr --sysconfdir=/etc/burp --localstatedir=/data
-  args:
-    chdir: /tmp/burp
-
-- name: Build and install Burp
-  make:
-    chdir: /tmp/burp
-    target: "{{ item }}"
-  with_items:
-    - install
-    - install-configs
-
-- file: path="{{ item }}" state=directory mode=0700
-  with_items:
-    - /etc/burp
-    - /data
-    - /defaults
-
-- shell: rsync -r --ignore-existing /etc/burp/ /defaults/ && rm -rf /etc/burp/*
-
-- lineinfile: dest=/defaults/burp-server.conf state=present regexp="^directory =" line="directory = /data"
-- lineinfile: dest=/defaults/burp-server.conf state=present regexp="^stdout =" line="stdout = 1"
-
 - action: setup

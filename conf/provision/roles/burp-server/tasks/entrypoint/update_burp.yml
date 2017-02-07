@@ -1,0 +1,54 @@
+---
+
+- debug: msg="updating burp installation..."
+
+# Clean existing git repo
+- file: path=/tmp/burp state=absent
+
+- name: Download Source Code
+  git:
+    repo: https://github.com/grke/burp.git
+    dest: /tmp/burp
+    version: "{{ remote_version }}"
+    accept_hostkey: yes
+
+- name: Generate automake files
+  command: autoreconf -vif
+  args:
+    chdir: /tmp/burp
+
+- name: Configure build options
+  command: ./configure --prefix=/usr --sysconfdir=/etc/burp --localstatedir=/data
+  args:
+    chdir: /tmp/burp
+
+# Build the default target
+- name: Build Burp
+  make:
+    chdir: /tmp/burp
+
+# Run `install` target
+- name: Install Burp
+  make:
+    chdir: /tmp/burp
+    target: install
+
+- stat: path=/etc/burp/burp-server.conf
+  register: install_configs
+
+- name: Install Configs
+  make:
+    chdir: /tmp/burp
+    target: install-configs
+  when: install_configs.stat.exists == False
+
+- name: Save installed version info
+  copy:
+    content: "{{ remote_version }}"
+    dest: /.installed_version.txt
+
+- name: Disable Updates
+  copy:
+    content: "Updates have been disabled"
+    dest: /tmp/no-version.nfo
+  when: VERSION != "latest"
