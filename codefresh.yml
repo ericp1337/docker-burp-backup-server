@@ -7,6 +7,6 @@ steps:
     working_directory: ./
     dockerfile: Dockerfile
     build-arguments:
-      - BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+      - BUILD_DATE=${{BUILD_DATE}}
       - VCS_REF=${{CF_SHORT_REVISION}}
     
