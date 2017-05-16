@@ -9,4 +9,13 @@ steps:
     build-arguments:
       - BUILD_DATE=${{BUILD_DATE}}
       - VCS_REF=${{CF_SHORT_REVISION}}
-    
+    on_success:
+      metadata:
+        set:
+          - '${{build_step.imageId}}':
+              - CF_QUALITY: true
+    on_fail:
+      metadata:
+        set:
+          - '${{build_step.imageId}}':
+              - CF_QUALITY: false
