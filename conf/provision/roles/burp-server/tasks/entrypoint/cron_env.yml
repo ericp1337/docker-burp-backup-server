@@ -1,7 +1,0 @@
----
-
-- name: "Set Summary Script Email Address"
-  cron:
-    env: yes
-    name: BURP_EMAIL
-    value: "{{ BURP_EMAIL }}"

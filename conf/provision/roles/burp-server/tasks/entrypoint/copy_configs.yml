@@ -1,4 +1,0 @@
----
-
-- name: Copy default configs to /etc/burp
-  shell: rsync -r --ignore-existing /defaults/ /etc/burp/

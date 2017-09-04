@@ -1,8 +1,0 @@
----
-
-- name: Copy uthash.h to /usr/include
-  copy:
-    src: uthash.h
-    dest: /usr/include/uthash.h
-
-- action: setup

@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+/usr/sbin/bedup -l -c /etc/burp/burp-server.conf >> /data/burp-bedup.log 2>&1

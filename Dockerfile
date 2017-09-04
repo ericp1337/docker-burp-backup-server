@@ -4,6 +4,11 @@ VOLUME ["/data", "/etc/burp"]
 
 EXPOSE 4971 4972
 
+# Upgrade to Alpine Linux v3.6
+RUN sed -i -e 's/v3\.5/v3.6/g' /etc/apk/repositories \
+    && apk update \
+    && apk upgrade --available
+
 # Install Required System Packages
 RUN /usr/local/bin/apk-upgrade \
     && /usr/local/bin/apk-install \
@@ -15,6 +20,7 @@ RUN /usr/local/bin/apk-upgrade \
     g++ \
     gcc \
     git \
+    jq \
     libacl \
     libgcc \
     librsync \
@@ -26,8 +32,10 @@ RUN /usr/local/bin/apk-upgrade \
     ncurses-dev \
     openssl \
     openssl-dev \
+    openssh \
     rsync \
     unzip \
+    uthash-dev \
     zlib \
     zlib-dev
 
