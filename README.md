@@ -58,6 +58,7 @@ The version number corresponds to what version of burp server you want to run. T
 
 ## Version History
 
-+ **1/31/2017** Dynamically install burp versions without needing to pre-install burp for each docker container version
++ **09/04/2017:** Migrate from ansible to shell scripts since the upstream base image seems to have dropped support for it.
++ **01/31/2017:** Dynamically install burp versions without needing to pre-install burp for each docker container version
 + **09/12/2016:** Base on Alpine Linux w/ ansible provisioning
 + **07/12/2016:** Inital Release
