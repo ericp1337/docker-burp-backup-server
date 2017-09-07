@@ -1,12 +1,17 @@
-FROM webdevops/base:alpine-3
+FROM webdevops/base:alpine
 
 VOLUME ["/data", "/etc/burp"]
 
 EXPOSE 4971 4972
 
+# Upgrade to Alpine Linux v3.6
+RUN sed -i -e 's/v3\.5/v3.6/g' /etc/apk/repositories \
+    && apk update \
+    && apk upgrade --available
+
 # Install Required System Packages
-RUN /usr/local/bin/apk-upgrade \
-    && /usr/local/bin/apk-install \
+RUN apk-upgrade\
+    && apk-install \
     acl-dev \
     attr-dev \
     autoconf \
@@ -28,6 +33,7 @@ RUN /usr/local/bin/apk-upgrade \
     openssl-dev \
     rsync \
     unzip \
+    uthash-dev \
     zlib \
     zlib-dev
 
@@ -43,14 +49,9 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-type="Git" \
       org.label-schema.vcs-url="https://github.com/computerfr33k/docker-burp-backup-server"
 
-#RUN /usr/local/bin/apk-install \
-#    bash bash-completion \
-#    pciutils usbutils coreutils binutils findutils grep \
-#    build-base gcc abuild binutils
-
 COPY conf/ /opt/docker/
 
 # Provision
-RUN /opt/docker/bin/provision add --tag bootstrap --tag entrypoint burp-server \
+RUN /opt/docker/bin/provision add --tag entrypoint burp-server \
     && /opt/docker/bin/bootstrap.sh \
-    && rm -rf /tmp/*
+    && docker-image-cleanup

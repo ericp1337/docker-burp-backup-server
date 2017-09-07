@@ -18,7 +18,7 @@
     chdir: /tmp/burp
 
 - name: Configure build options
-  command: ./configure --prefix=/usr --sysconfdir=/etc/burp --localstatedir=/data
+  command: ./configure --prefix=/usr --sysconfdir=/etc/burp --localstatedir=/data --disable-ipv6
   args:
     chdir: /tmp/burp
 
